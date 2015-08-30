@@ -1,0 +1,29 @@
+# Ensure a SSH key is present
+# If a key matches this name, will return the ssh key id and changed = False
+# If no existing key matches this name, a new key is created, the ssh key id is returned and changed = False
+- name: deploy local ssh key
+  digital_ocean: >
+      state=present
+      command=ssh
+      name="{{ pub_key_name }}"
+      ssh_pub_key="{{ pub_key }}"
+      api_token="{{ api_token }}"
+  register: my_droplet
+
+# Create a new Droplet
+# Will return the droplet details including the droplet id (used for idempotence)
+- name: deploy droplet
+  digital_ocean: >
+      state=present
+      command=droplet
+      name=mydroplet
+      api_token="{{ api_token }}"
+      ssh_key_ids="{{ my_droplet.ssh_key.id }}}"
+      size_id="{{ deploy_size }}}"
+      region_id="{{ deploy_region_id }}}"
+      image_id="{{ image_id }}"
+      wait_timeout=500
+  register: my_droplet
+
+- debug: msg="ID is {{ my_droplet.droplet.id }}"
+- debug: msg="IP is {{ my_droplet.droplet.ip_address }}"

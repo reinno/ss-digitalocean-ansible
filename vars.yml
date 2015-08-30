@@ -1,0 +1,25 @@
+api_token: "{{ API_TOKEN }}"
+#api_key: "{{ API_KEY }}"
+#client_id: "{{ CLIENT_ID }}"
+
+pub_key_name: "{{ KEY_NAME|default('my_ssh_key') }}"
+pub_key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+# https://developers.digitalocean.com/documentation/v2/#regions
+
+# New York 1: nyc1
+# New York 2: nyc2
+# New York 3: nyc3
+# Amsterdam 1: ams1
+# Amsterdam 2: ams2
+# Amsterdam 3: ams3
+# San Francisco 1: sfo1
+# Singapore 1: sgp1
+# London 1: lon1
+# Frankfurt 1: fra1
+deploy_region_id: "{{ REGION_ID|default(sfo1) }}"
+
+#"512mb"/"1gb"/"2gb"/"4gb"/"8gb"/"16gb"/"32gb"/"48gb"/"64gb"
+deploy_size: "{{ DEPLOY_SIZE|default(512mb) }}"
+
+image_id: "{{ IMAGE_ID|default(ubuntu-14-04-x64) }}"

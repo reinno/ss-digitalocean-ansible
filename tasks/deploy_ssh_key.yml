@@ -1,0 +1,15 @@
+# Ensure a SSH key is present
+# If a key matches this name, will return the ssh key id and changed = False
+# If no existing key matches this name, a new key is created, the ssh key id is returned and changed = False
+- name: deploy local ssh key
+  digital_ocean: >
+      state=present
+      command=ssh
+      name="{{ pub_key_name }}"
+      ssh_pub_key="{{ pub_key }}"
+      api_token="{{ api_token }}"
+  register: my_droplet
+
+- debug: msg="ssh_key id is {{my_droplet.ssh_key.id}}}"
+#client_id="{{ client_id }}"
+#api_key="{{ api_key }}"
