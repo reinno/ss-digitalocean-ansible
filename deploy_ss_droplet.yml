@@ -6,4 +6,5 @@
   vars_files:
     - vars.yml
   tasks:
+    #- include: tasks/deploy_ssh_key.yml
     - include: tasks/deploy_droplet.yml

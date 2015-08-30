@@ -10,6 +10,3 @@
       api_token="{{ api_token }}"
   register: my_droplet
 
-- debug: msg="ssh_key id is {{my_droplet.ssh_key.id}}}"
-#client_id="{{ client_id }}"
-#api_key="{{ api_key }}"
